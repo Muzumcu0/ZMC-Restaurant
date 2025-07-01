@@ -131,24 +131,24 @@ zmc-restorant/
 
 ### Giriş ve Kullanıcı Arayüzü
 
-- ![Login Sayfası](pictures_of_zmc_restorant/ZMC-Login-darkmode.jpg)
-- ![User Screen](pictures_of_zmc_restorant/ZMC-user-screen-darkmode.jpg)
-- ![User Reservation](pictures_of_zmc_restorant/ZMC-user-reservation-darkmode.jpg)
-- ![User Reservation 2](pictures_of_zmc_restorant/ZMC-user-reservation-lightmode.jpg)
+- ![Login Sayfası](zmc-restorant/pictures_of_zmc_restorant/ZMC-Login-darkmode.jpg)
+- ![User Screen](zmc-restorant/pictures_of_zmc_restorant/ZMC-user-screen-darkmode.jpg)
+- ![User Reservation](zmc-restorant/pictures_of_zmc_restorant/ZMC-user-reservation-darkmode.jpg)
+- ![User Reservation 2](zmc-restorant/pictures_of_zmc_restorant/ZMC-user-reservation-lightmode.jpg)
 
 ### Restoran Sahibi Paneli
 
-- ![Owner Sayfası](pictures_of_zmc_restorant/ZMC-owner-restorant-lightmode.jpg)
-- ![Owner Masa Yerleşimi](pictures_of_zmc_restorant/ZMC-owner-restorant-tableLayout-lightmode.jpg)
+- ![Owner Sayfası](zmc-restorant/pictures_of_zmc_restorant/ZMC-owner-restorant-lightmode.jpg)
+- ![Owner Masa Yerleşimi](zmc-restorant/pictures_of_zmc_restorant/ZMC-owner-restorant-tableLayout-lightmode.jpg)
 
 ### Veritabanı Diyagramı
 
-- ![SQL Diagram](database/sql%20diagram.jpg)
+- ![SQL Diagram](zmc-restorant/database/sql%20diagram.jpg)
 
 ### Örnek Kapak Resimleri
 
-- ![Kapak 1](uploads/cover_1751202995853.png)
-- ![Kapak 2](uploads/cover_1751316184376.png)
+- ![Kapak 1](zmc-restorant/uploads/cover_1751202995853.png)
+- ![Kapak 2](zmc-restorant/uploads/cover_1751316184376.png)
 
 ---
 
