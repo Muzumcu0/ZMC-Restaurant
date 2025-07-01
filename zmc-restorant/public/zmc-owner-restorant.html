@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <!-- Cropper.js CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css" rel="stylesheet"/>
+  <!-- Cropper.js JS -->
+  <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
+
+  <meta charset="UTF-8" />
+  <title>Restorantim</title>
+  <link rel="stylesheet" href="zmc-owner-restorant.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sol Panel -->
+    <div class="left-panel">
+      <div class="image-upload" onclick="document.getElementById('coverInput').click();">
+        <span>Restoran Kapak Resmi Ekle</span>
+        <input type="file" id="coverInput" accept="image/*" style="display:none" />
+        <img id="coverPreview" src="" alt="Kapak Resmi" style="display:none; max-width:100%;"/>
+        <!-- Cropper için img -->
+        <img id="coverCropper" style="display:none; max-width: 100%;" />
+        <button id="cropButton" style="display:none;">Kırp ve Kaydet</button>
+      </div>
+
+
+      <input type="text" id="restaurantName" placeholder="Restoran İsmi" />
+      <div class="stars">
+        <span class="star">★</span><span class="star">★</span>
+        <span class="star">★</span><span class="star">★</span>
+        <span class="star">★</span>
+      </div>
+
+      <textarea
+        id="about"
+        placeholder="Hakkında (50-200 karakter)"
+        maxlength="200"
+      ></textarea>
+    </div>
+
+    <!-- Orta Panel -->
+    <div class="middle-panel">
+      <div class="menu-section">
+        <h2>Menü</h2>
+        <input
+          type="text"
+          id="newCategoryName"
+          placeholder="Kategori adı (örn: Ana Yemek)"
+        />
+        <button onclick="addCategory()">Kategori Ekle</button>
+        <div id="menuCategories"></div>
+      </div>
+
+      <h2>Haftalık Müşteri Yorumları</h2>
+      <div class="comments-box">
+        <!-- Yorumlar dinamik eklenecek -->
+      </div>
+    </div>
+
+    <!-- Sağ Panel -->
+    <div class="right-panel">
+      <h2>Masa Düzeni</h2>
+
+      <div class="floor-management">
+        <label>Katlar:</label>
+        <div id="floorList"></div>
+        <input type="text" id="newFloorName" placeholder="Yeni Kat İsmi" />
+        <button onclick="addFloor()">Kat Ekle</button>
+      </div>
+
+      <label>Tarih Seç:</label>
+      <input type="date" id="date" />
+
+      <label>Saat Seç:</label>
+      <select id="time"></select>
+
+      <label>Masa Türü:</label>
+      <select id="tableType">
+        <option value="small">Küçük Kare</option>
+        <option value="big">Büyük Dikdörtgen</option>
+      </select>
+
+      <button onclick="addTable()">Masa Ekle</button>
+      <button onclick="saveLayout()">Kaydet</button>
+
+      <div id="layout-area"></div>
+
+      <div class="table-status">
+        <p>Full: <span id="fullCount">0</span></p>
+        <p>Empty: <span id="emptyCount">0</span></p>
+      </div>
+
+      <div class="legend">
+        <p>◼ Küçük Masa</p>
+        <p>█ Büyük Masa</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Renk Paleti Seçici - Sol Alt Köşe -->
+  <div id="colorPaletteSelector">
+    <h3>Renk Paleti Seç</h3>
+    <div id="presetPalettes">
+      <!-- Palet butonları JS ile eklenecek -->
+    </div>
+    <hr />
+    <h4>Kendi Paletinizi Oluşturun</h4>
+    <label>Birincil Renk: <input type="color" id="primaryColorInput" value="#3498db" /></label><br/>
+    <label>İkincil Renk: <input type="color" id="secondaryColorInput" value="#2980b9" /></label><br/>
+    <button id="applyCustomPalette">Uygula</button>
+  </div>
+  <button id="togglePaletteBtn">🎨</button>
+
+  <script src="zmc-owner-restorant.js"></script>
+  
+</body>
+</html>

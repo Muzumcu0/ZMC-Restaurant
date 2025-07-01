@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZMC Online Restaurant Appointment System</title>
+    <style>
+       /* Import modern fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* CSS Custom Properties for Design System */
+:root {
+  /* Color Palette */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --success-gradient: linear-gradient(135deg, #00c851 0%, #007e33 100%);
+  --warning-gradient: linear-gradient(135deg, #ff9500 0%, #ff5722 100%);
+  --error-gradient: linear-gradient(135deg, #ff5722 0%, #e91e63 100%);
+  
+  /* Neutral Colors */
+  --white: #ffffff;
+  --black: #000000;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+  
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-secondary: 'Poppins', sans-serif;
+  
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 50rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--gray-900);
+  background: var(--primary-gradient);
+  background-attachment: fixed;
+  background-size: 400% 400%;
+  min-height: 100vh;
+  padding: var(--space-5);
+  animation: gradientShift 20s ease infinite;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Layout */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+  padding: var(--space-8);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  overflow: hidden;
+  animation: slideDown 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.header h1 {
+  color: var(--white);
+  font-family: var(--font-secondary);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.header p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-12);
+  animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--space-4) var(--space-16) var(--space-4) var(--space-5);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-xl);
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+}
+
+.search-input:focus {
+  outline: none;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-2xl), var(--shadow-glow);
+  border-color: rgba(255, 255, 255, 0.5);
+  background: var(--white);
+}
+
+.search-input::placeholder {
+  color: var(--gray-400);
+  font-weight: 400;
+}
+
+.search-btn {
+  position: absolute;
+  right: var(--space-2);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--primary-gradient);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+}
+
+.search-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.search-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.search-btn::before {
+  content: '🔍';
+  font-size: 20px;
+  filter: brightness(1.2);
+}
+
+/* Restaurant Cards Grid */
+.restaurants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-8);
+  margin-bottom: var(--space-12);
+}
+
+.restaurant-card {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.restaurant-card:nth-child(1) { animation-delay: 0.1s; }
+.restaurant-card:nth-child(2) { animation-delay: 0.2s; }
+.restaurant-card:nth-child(3) { animation-delay: 0.3s; }
+.restaurant-card:nth-child(4) { animation-delay: 0.4s; }
+.restaurant-card:nth-child(5) { animation-delay: 0.5s; }
+.restaurant-card:nth-child(6) { animation-delay: 0.6s; }
+.restaurant-card:nth-child(7) { animation-delay: 0.7s; }
+.restaurant-card:nth-child(8) { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.restaurant-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: var(--shadow-2xl);
+}
+
+.restaurant-card.hidden {
+  display: none;
+}
+
+.restaurant-card.selected {
+  transform: translateY(-16px) scale(1.05);
+  box-shadow: var(--shadow-2xl), var(--shadow-glow);
+  border-color: var(--primary-500);
+}
+
+/* Restaurant Image with Modern Gradients */
+.restaurant-image {
+  width: 100%;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: var(--primary-gradient);
+}
+
+.restaurant-card:nth-child(1) .restaurant-image {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+}
+
+.restaurant-card:nth-child(2) .restaurant-image {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.restaurant-card:nth-child(3) .restaurant-image {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.restaurant-card:nth-child(4) .restaurant-image {
+  background: var(--primary-gradient);
+}
+
+.restaurant-card:nth-child(5) .restaurant-image {
+  background: var(--secondary-gradient);
+}
+
+.restaurant-card:nth-child(6) .restaurant-image {
+  background: var(--accent-gradient);
+}
+
+.restaurant-card:nth-child(7) .restaurant-image {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.restaurant-card:nth-child(8) .restaurant-image {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.restaurant-card:nth-child(9) .restaurant-image {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+}
+
+.restaurant-card:nth-child(10) .restaurant-image {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.restaurant-card:nth-child(11) .restaurant-image {
+  background: var(--primary-gradient);
+}
+
+.restaurant-card:nth-child(12) .restaurant-image {
+  background: var(--secondary-gradient);
+}
+
+.restaurant-image::before {
+  content: '🍽️';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4.5rem;
+  opacity: 0.4;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  transition: all var(--transition-normal);
+}
+
+.restaurant-card:hover .restaurant-image::before {
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 0.6;
+}
+
+.restaurant-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+  transition: opacity var(--transition-normal);
+}
+
+.restaurant-card:hover .restaurant-image::after {
+  opacity: 0;
+}
+
+/* Restaurant Info */
+.restaurant-info {
+  padding: var(--space-6);
+}
+
+.restaurant-name {
+  font-size: 1.375rem;
+  font-weight: 600;
+  font-family: var(--font-secondary);
+  color: var(--gray-900);
+  margin-bottom: var(--space-2);
+  line-height: 1.3;
+}
+
+.restaurant-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-3);
+  gap: var(--space-2);
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 1.125rem;
+  filter: drop-shadow(0 1px 2px rgba(255, 193, 7, 0.3));
+}
+
+.rating-text {
+  color: var(--gray-600);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.restaurant-cuisine {
+  color: var(--gray-500);
+  font-size: 0.9375rem;
+  margin-bottom: var(--space-4);
+  font-weight: 500;
+}
+
+.book-btn {
+  background: var(--primary-gradient);
+  color: var(--white);
+  border: none;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  transition: all var(--transition-normal);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-primary);
+}
+
+.book-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s;
+}
+
+.book-btn:hover::before {
+  left: 100%;
+}
+
+.book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(102, 126, 234, 0.4);
+}
+
+.book-btn:active {
+  transform: translateY(0);
+}
+
+/* Overall Rating Section */
+.overall-rating {
+  text-align: center;
+  margin-top: var(--space-12);
+  padding: var(--space-10);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+}
+
+.overall-rating h3 {
+  color: var(--white);
+  margin-bottom: var(--space-4);
+  font-size: 1.75rem;
+  font-weight: 600;
+  font-family: var(--font-secondary);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.big-stars {
+  font-size: 3rem;
+  color: #ffc107;
+  text-shadow: 0 4px 20px rgba(255, 193, 7, 0.4);
+  filter: drop-shadow(0 2px 4px rgba(255, 193, 7, 0.3));
+}
+
+/* States and Feedback */
+.no-results {
+  text-align: center;
+  padding: var(--space-12);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--white);
+  font-size: 1.25rem;
+  font-weight: 500;
+  display: none;
+  grid-column: 1 / -1;
+  box-shadow: var(--shadow-lg);
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-16);
+  grid-column: 1 / -1;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid var(--white);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--space-12);
+  background: rgba(255, 87, 34, 0.15);
+  border: 2px solid rgba(255, 87, 34, 0.3);
+  border-radius: var(--radius-2xl);
+  color: var(--white);
+  margin: var(--space-5) 0;
+  backdrop-filter: blur(10px);
+}
+
+.error-message h3 {
+  margin-bottom: var(--space-4);
+  color: #ff6347;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.error-message button {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-6);
+  background: var(--primary-gradient);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+  font-family: var(--font-primary);
+}
+
+.error-message button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.success-feedback {
+  position: fixed;
+  top: var(--space-5);
+  right: var(--space-5);
+  background: var(--success-gradient);
+  color: var(--white);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 200, 81, 0.3);
+  animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.search-highlight {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: var(--gray-900);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+/* Utility Animations */
+.loading {
+  opacity: 0;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: var(--space-3);
+  }
+  
+  .container {
+    padding: 0;
+  }
+  
+  .header {
+    padding: var(--space-6);
+    margin-bottom: var(--space-8);
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+  }
+  
+  .restaurants-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+  
+  .search-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: var(--space-4) var(--space-12) var(--space-4) var(--space-4);
+  }
+  
+  .search-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .restaurant-info {
+    padding: var(--space-5);
+  }
+  
+  .success-feedback {
+    top: var(--space-3);
+    right: var(--space-3);
+    left: var(--space-3);
+    text-align: center;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .restaurants-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 1025px) {
+  .restaurants-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .restaurant-card {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .restaurant-name {
+    color: var(--white);
+  }
+  
+  .rating-text {
+    color: var(--gray-300);
+  }
+  
+  .restaurant-cuisine {
+    color: var(--gray-400);
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  body {
+    background: var(--primary-500);
+  }
+  
+  .header::before {
+    animation: none;
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ZMC Online Restaurant</h1>
+            <p>Discover amazing restaurants and book your table instantly</p>
+        </div>
+
+        <div class="search-bar">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search restaurants, cuisines, or locations..." id="searchInput">
+                <button class="search-btn" onclick="performSearch()"></button>
+            </div>
+        </div>
+
+        <div class="restaurants-grid" id="restaurantsGrid">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+        </div>
+        
+        <div class="no-results" id="noResults">
+            <p>No restaurants found matching your search.</p>
+            <p>Try different keywords or browse all restaurants.</p>
+        </div>
+
+        <div class="overall-rating">
+            <h3>Overall Customer Rating</h3>
+            <div class="big-stars">★★★★★</div>
+            <p style="color: rgba(255, 255, 255, 0.8); margin-top: 10px;">Based on 10 reviews</p>
+        </div>
+    </div>
+
+    <script>
+        
+        let restaurantsData = []; // Store loaded restaurants for search
+        let searchEventListenerAdded = false; // Prevent duplicate listeners
+        let isLoading = false; // Prevent multiple simultaneous requests
+       //localStorage.setItem("userId", data.userId);///////////////////////////////////////////////////////////////////////////
+        // Load restaurants from API
+        async function loadRestaurants() {
+            if (isLoading) return;
+            isLoading = true;
+
+            try {
+                console.log('Loading restaurants from API...');
+                
+                // Show loading spinner
+                const grid = document.getElementById('restaurantsGrid');
+                grid.innerHTML = `
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                    </div>
+                `;
+
+                const response = await fetch('http://localhost:3000/api/restaurants');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Loaded restaurants:', data);
+
+                if (!Array.isArray(data) || data.length === 0) {
+                    console.log('No restaurants found or invalid data format');
+                    showNoRestaurantsMessage();
+                    return;
+                }
+                
+                restaurantsData = data; // Store for search functionality
+                grid.innerHTML = ''; // Clear loading spinner
+
+                data.forEach((rest, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'restaurant-card loading';
+                    card.style.animationDelay = `${index * 0.1}s`;
+                    card.setAttribute('data-restaurant-id', rest.Id);
+                    card.setAttribute('data-restaurant-name', rest.Name || '');
+                    card.setAttribute('data-restaurant-about', rest.About || '');
+
+                    // Handle cover image - check if it's a full URL or relative path
+                    let imageStyle = '';
+                    if (rest.CoverImage) {
+                        const imageUrl = rest.CoverImage.startsWith('http') 
+                            ? rest.CoverImage 
+                            : `http://localhost:3000${rest.CoverImage}`;
+                        imageStyle = `style="background-image: url('${imageUrl}'); background-size: cover; background-position: center; background-repeat: no-repeat;"`;
+                    }
+
+                    card.innerHTML = `
+                        <div class="restaurant-image" ${imageStyle}></div>
+                        <div class="restaurant-info">
+                            <div class="restaurant-name">${rest.Name || 'Restaurant Name'}</div>
+                            <div class="restaurant-rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-text">4.7 (${Math.floor(Math.random() * 300) + 50} reviews)</span>
+                            </div>
+                            <div class="restaurant-cuisine">${rest.About || 'Cuisine not specified'}</div>
+                            <button class="book-btn" >Book Now</button>
+
+                        </div>
+                    `;
+                    // Buton olayını ekle
+const bookBtn = card.querySelector('.book-btn');
+bookBtn.addEventListener('click', function (e) {
+    e.stopPropagation(); // Kart seçimini tetiklemesin
+    goToRestaurant(rest.Id, e); // <-- event'i geçir
+});
+
+
+
+                    // Add click event for card selection animation
+                    card.addEventListener('click', function(e) {
+                        if (!e.target.classList.contains('book-btn')) {
+                            selectRestaurant(rest.Name, this);
+                        }
+                    });
+
+                    // Add hover effects
+                    card.addEventListener('mouseenter', function() {
+                        if (!this.classList.contains('selected')) {
+                            this.style.transform = 'translateY(-10px) scale(1.02)';
+                        }
+                    });
+                    
+                    card.addEventListener('mouseleave', function() {
+                        if (!this.classList.contains('selected')) {
+                            this.style.transform = 'translateY(0) scale(1)';
+                        }
+                    });
+
+                    grid.appendChild(card);
+                });
+
+                // Add search event listener only once, after restaurants are loaded
+                if (!searchEventListenerAdded) {
+                    const searchInput = document.getElementById('searchInput');
+                    searchInput.addEventListener('input', searchRestaurants);
+                    searchInput.addEventListener('keypress', function(e) {
+                        if (e.key === 'Enter') {
+                            performSearch();
+                        }
+                    });
+                    searchEventListenerAdded = true;
+                }
+
+                // Add entrance animations
+                setTimeout(() => {
+                    const cards = document.querySelectorAll('.restaurant-card');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                        }, index * 100);
+                    });
+                }, 100);
+
+            } catch (err) {
+                console.error("Restaurants could not be loaded:", err);
+                showErrorMessage(err.message);
+            } finally {
+                isLoading = false;
+            }
+        }
+
+        // Show detailed error message
+        function showErrorMessage(errorMessage) {
+            const grid = document.getElementById('restaurantsGrid');
+            grid.innerHTML = `
+                <div class="error-message">
+                    <h3>Unable to load restaurants</h3>
+                    <p>Please make sure the server is running on http://localhost:3000</p>
+                    <p><strong>Error:</strong> ${errorMessage}</p>
+                    <button onclick="loadRestaurants()">Try Again</button>
+                </div>
+            `;
+        }
+
+        // Show message when no restaurants are found
+        function showNoRestaurantsMessage() {
+            const grid = document.getElementById('restaurantsGrid');
+            grid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 20px; color: white;">
+                    <h3>No restaurants available</h3>
+                    <p>There are no restaurants in the system at the moment.</p>
+                    <p>Please check back later or contact the administrator.</p>
+                </div>
+            `;
+        }
+
+        // Navigate to restaurant reservation page
+       function goToRestaurant(id, event) {
+    console.log(`Navigating to restaurant ID: ${id}`);
+    const button = event.target;
+    button.style.transform = 'scale(0.95)';
+    button.innerHTML = 'Loading...';
+
+    setTimeout(() => {
+        window.location.href = `zmc-user-reservation.html?restId=${id}`;
+    }, 300);
+}
+
+
+
+
+        // Improved search functionality with highlighting
+        function searchRestaurants() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.restaurant-card');
+            const noResultsDiv = document.getElementById('noResults');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const nameElement = card.querySelector('.restaurant-name');
+                const cuisineElement = card.querySelector('.restaurant-cuisine');
+                
+                const originalName = card.getAttribute('data-restaurant-name') || '';
+                const originalAbout = card.getAttribute('data-restaurant-about') || '';
+                
+                const name = originalName.toLowerCase();
+                const cuisine = originalAbout.toLowerCase();
+                
+                const matchesSearch = searchTerm === '' || 
+                                    name.includes(searchTerm) || 
+                                    cuisine.includes(searchTerm);
+
+                if (matchesSearch) {
+                    card.classList.remove('hidden');
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease';
+                    visibleCount++;
+
+                    // Highlight search terms
+                    if (searchTerm !== '') {
+                        const highlightText = (text, term) => {
+                            const regex = new RegExp(`(${term})`, 'gi');
+                            return text.replace(regex, '<span class="search-highlight">$1</span>');
+                        };
+                        
+                        nameElement.innerHTML = highlightText(originalName, searchTerm);
+                        cuisineElement.innerHTML = highlightText(originalAbout, searchTerm);
+                    } else {
+                        nameElement.innerHTML = originalName;
+                        cuisineElement.innerHTML = originalAbout;
+                    }
+                } else {
+                    card.classList.add('hidden');
+                    card.style.display = 'none';
+                }
+            });
+
+            // Show/hide no results message
+            if (visibleCount === 0 && searchTerm !== '') {
+                noResultsDiv.style.display = 'block';
+            } else {
+                noResultsDiv.style.display = 'none';
+            }
+
+            console.log(`Search for "${searchTerm}" returned ${visibleCount} results`);
+        }
+
+        // Search button click handler
+        function performSearch() {
+            searchRestaurants();
+            
+            // Add visual feedback to search button
+            const searchBtn = document.querySelector('.search-btn');
+            searchBtn.style.transform = 'translateY(-50%) scale(0.9)';
+            setTimeout(() => {
+                searchBtn.style.transform = 'translateY(-50%) scale(1.1)';
+                setTimeout(() => {
+                    searchBtn.style.transform = 'translateY(-50%) scale(1)';
+                }, 100);
+            }, 100);
+        }
+
+        // Restaurant selection with animation
+        function selectRestaurant(name, cardElement) {
+            // Remove previous selections
+            document.querySelectorAll('.restaurant-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Add selection animation
+            cardElement.classList.add('selected');
+            
+            // Show selection feedback
+            showSelectionFeedback(name);
+            
+            // Auto-remove selection after 3 seconds
+            setTimeout(() => {
+                cardElement.classList.remove('selected');
+            }, 3000);
+        }
+
+        // Show selection feedback
+        function showSelectionFeedback(name) {
+            // Remove existing feedback
+            const existingFeedback = document.querySelector('.success-feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'success-feedback';
+            feedback.innerHTML = `✓ Selected: ${name}`;
+            
+            document.body.appendChild(feedback);
+            
+            setTimeout(() => {
+                feedback.style.animation = 'slideOut 0.5s ease forwards';
+                setTimeout(() => {
+                    if (feedback.parentNode) {
+                        feedback.remove();
+                    }
+                }, 500);
+            }, 2500);
+        }
+
+        // Clear search function
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchRestaurants();
+        }
+
+        // Refresh restaurants
+        function refreshRestaurants() {
+            restaurantsData = [];
+            searchEventListenerAdded = false;
+            loadRestaurants();
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded - Initializing ZMC Restaurant App');
+            
+            // Load restaurants on page load
+            loadRestaurants();
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // ESC to clear search
+                if (e.key === 'Escape') {
+                    clearSearch();
+                }
+                // F5 or Ctrl+R to refresh (prevent default and use custom refresh)
+                if (e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
+                    e.preventDefault();
+                    refreshRestaurants();
+                }
+                // Ctrl+F to focus search
+                if (e.ctrlKey && e.key === 'f') {
+                    e.preventDefault();
+                    document.getElementById('searchInput').focus();
+                }
+            });
+            
+            // Add search input focus effect
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+            
+            searchInput.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+
+            console.log('ZMC Restaurant App initialized successfully');
+        });
+
+        // Add window load event for final checks
+        window.addEventListener('load', function() {
+            console.log('Window fully loaded');
+            
+            // Check if restaurants loaded successfully after a delay
+            setTimeout(() => {
+                if (restaurantsData.length === 0 && !isLoading) {
+                    console.warn('No restaurants loaded after page load');
+                }
+            }, 3000);
+        });
+
+        // Handle connection errors
+        window.addEventListener('online', function() {
+            console.log('Connection restored');
+            if (restaurantsData.length === 0) {
+                loadRestaurants();
+            }
+        });
+
+        window.addEventListener('offline', function() {
+            console.log('Connection lost');
+        });
+    </script>
+</body>
+</html>
